@@ -1,0 +1,16 @@
+---
+elements:
+  - type: Hidden
+    name: deal_id
+    container_tag:
+  - type: Hidden
+    name: user_id
+    container_tag:
+  - type: Textarea
+    name: note
+    container_tag:
+  - type: Submit
+    name: submit
+    value: Submit
+    attrs:
+      class: btn btn-primary

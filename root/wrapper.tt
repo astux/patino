@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html land="en">
+  <head>
+    <title>Patino</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/jquery.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="[% c.uri_for('/') %]">Patino</a>
+
+          [% IF c.user_exists %]
+
+          <ul class="nav">
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/contacts">Contacts</a></li>
+            <li><a href="/deals">Deals</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+          </ul>
+
+          [% END %]
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          [% IF c.flash.success %]
+          <div class="alert alert-success">[% c.flash.success %]</div>
+          [% ELSIF c.flash.error %]
+          <div class="alert alert-error">[% c.flash.error %]</div>
+          [% ELSIF c.flash.info %]
+          <div class="alert alert-info">[% c.flash.info %]</div>
+          [% END %]
+
+          [% content %]
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

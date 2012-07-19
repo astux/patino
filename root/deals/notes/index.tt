@@ -1,0 +1,11 @@
+<h2>Deal name: [% object.name %]</h2>
+[% FOREACH note IN notes %]
+<fieldset>
+<legend>Noted by [% note.user.username %] at [% note.created %]</legend>
+<div class="note">
+  <p>[% note.note %]</p>
+  <p>[% note.user.username %] at [% note.created %]</p>
+
+</div>
+</fieldset>
+[% END %]

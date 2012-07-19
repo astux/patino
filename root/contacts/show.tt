@@ -1,0 +1,7 @@
+<div class='page-header'>
+  <h1>Contacts</h1>
+</div>
+
+<h2>Contact : [% object.name %]</h2>
+<p>Id: [% object.id %]</p>
+<p>Name: [% object.name %]</p>

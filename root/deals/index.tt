@@ -1,0 +1,54 @@
+<div class='page-header'>
+  <h1>Deals</h1>
+</div>
+
+<ul class="nav nav-pills">
+  <li class="active">
+    <a href="/deals/create"><i class="icon-plus icon-white"></i> Create Deal</a>
+  </li>
+</ul>
+
+<h2>Deals List</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Probability</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Responsible</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    [% FOREACH deal IN deals %]
+    <tr>
+      <td>[% deal.id %]</td>
+      <td><a href="[% c.uri_for('/deals', deal.id) %]">[% deal.name %]</a></td>
+      <td>[% deal.contact.name %]</td>
+      <td>[% deal.probability || 'N/A' %]</td>
+      <td>[% deal.price || 'N/A' %]</td>
+      <td>
+        [% IF deal.status == 'Pending' %]
+        <span class="badge badge-warning">[% deal.status %]</span>
+        [% ELSIF deal.status == 'Won' %]
+        <span class="badge badge-success">[% deal.status %]</span>
+        [% ELSIF deal.status == 'Lost' %]
+        <span class="badge badge-important">[% deal.status %]</span>
+        [% END %]
+      </td>
+      <td>[% deal.responsible.username %]</td>
+      <td>
+        <a href="[% c.uri_for('/deals', deal.id) %]">Show</a>,
+        <a href="[% c.uri_for('/deals', deal.id, 'edit') %]">Edit</a>,
+        <a href="[% c.uri_for('/deals', deal.id, 'delete') %]"
+           onClick="return confirm('Sure?');">Delete</a>
+      </td>
+    </tr>
+    [% END %]
+  </tbody>
+  <table>

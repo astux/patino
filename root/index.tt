@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h1>Dashboard</h1>
+</div>
+
+[% FOREACH item IN dashboard_items %]
+<fieldset>
+
+  [% IF item.type == 'deal_created' %]
+  
+  <h3><i class="icon-plus"></i> Deal Created: <a href="[% c.uri_for('/deals', item.deal_id) %]">[% item.deal.name %]</a></h3>
+
+  [% ELSIF item.type == 'deal_updated' %]
+
+  <h3><i class="icon-repeat"></i> Deal updated: <a href="[% c.uri_for('/deals', item.deal_id) %]">[% item.deal.name %]</a></h3>
+
+  [% ELSIF item.type == 'note_created' %]
+
+  <h3><i class="icon-pencil"></i> Note Created on <a href="[% c.uri_for('/deals', item.deal_id) %]">[% item.deal.name %]</a></h3>
+
+  [% END %]
+
+  <blockquote
+    <p>[% item.content.replace('\r\n', '<br>') %]</p>
+    <small>[% item.user.username %], [% time_ago(item.created) %]</small>
+  </blockquote>
+
+
+
+</fieldset>
+
+<hr>
+
+[% END %]

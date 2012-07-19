@@ -1,0 +1,53 @@
+---
+
+elements:
+    - type: Hidden
+      name: id
+ 
+    - type: Text
+      name: name
+      label: Name
+      constraint:
+        - Required
+      attrs:
+        class: span4
+      container_tag:
+
+    - type: Select
+      name: contact_id
+      label: Contact
+      model_config:
+        resultset: Contact
+      container_tag:
+    - type: Text
+      name: price
+      label: Price
+      constraints:
+        - type: Number
+      container_tag:
+    - type: Select
+      name: responsible_id
+      label: Responsible
+      model_config:
+        resultset: User
+      container_tag:
+    - type: Text
+      name: probability
+      label: Probability
+      constraints:
+        - type: Number
+      container_tag:
+    - type: Select
+      name: status
+      label: Status
+      options:
+        - ['Pending', 'Pending']
+        - ['Won', 'Won']
+        - ['Lost', 'Lost']
+      container_tag:
+    - type: Submit
+      name: submit
+      value: Submit
+
+      attrs:
+        class: btn btn-primary

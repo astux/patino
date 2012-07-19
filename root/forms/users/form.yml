@@ -1,0 +1,22 @@
+---
+elements:
+    - type: Hidden
+      name: id
+      container_tag:
+    - type: Text
+      name: username
+      label: Username
+      constraints:
+        - Required
+      container_tag:
+    - type: Password
+      name: password
+      label: Password
+      constraints:
+        - Required
+      container_tag:
+    - type: Submit
+      name: submit
+      value: Submit
+      attrs:
+        class: btn btn-primary

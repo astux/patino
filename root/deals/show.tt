@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>Deals</h1>
+</div>
+
+<h2>Deal : [% object.name %]</h2>
+
+<dl class="dl-horizontal">
+  <dt>Id</dt><dd>[% object.id %]</dd>
+  <dt>Name</dt><dd>[% object.name %]</dd>
+  <dt>Responsible</dt><dd>[% object.responsible.username %]</dd>
+  <dt>Contact</dt><dd>[% object.contact.name %]</dd>
+  <dt>Probability to win</dt><dd>[% object.probability %]</dd>
+  <dt>Price</dt><dd>[% object.price %]</dd>
+  <dt>Status</dt><dd>[% object.status %]</dd>
+  <dt>Date created</dt><dd>[% object.created %]</dd>
+  <dt>Date updated</dt><dd>[% object.updated %]</dd>
+</dl>
+
+[% FOREACH note IN object.notes %]
+
+<h3>Noted by [% note.user.username %], [% time_ago(note.created) %]</h3>
+<blockquote>
+  <p>[% note.note.replace('\r\n', '<br>') %]</p>
+  <small>[% note.user.username %], [% note.created %]</small>
+  <a href="[% c.uri_for('/deals', object.id, 'notes', note.id, 'delete') %]">Delete note</a>
+</blockquote>
+
+
+[% END %]
+
+[% form %]

@@ -1,0 +1,14 @@
+---
+elements:
+  - type: Hidden
+    name: id
+
+  - type: Text
+    name: name
+    label: Name
+    constraints:
+      - Required
+
+  - type: Submit
+    name: submit
+    value: Submit

@@ -1,0 +1,36 @@
+<div class='page-header'>
+  <h1>Users</h1>
+</div>
+
+<ul class="nav nav-pills">
+  <li class="active">
+    <a href="/users/create"><i class="icon-plus icon-white"></i> Create User</a>
+  </li>
+</ul>
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Username</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    [% FOREACH user IN users %]
+    <tr>
+      <td>[% user.id %]</td>
+      <td><a href="[% c.uri_for('/users', user.id) %]">[% user.username %]</a></td>
+      <td>
+        <a href="[% c.uri_for('/users', user.id) %]">Show</a>,
+        <a href="[% c.uri_for('/users', user.id, 'edit') %]">Edit</a>,
+        <a href="[% c.uri_for('/users', user.id, 'delete') %]"
+           onClick="return confirm('Sure?');">Delete</a>
+      </td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>

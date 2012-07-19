@@ -1,0 +1,52 @@
+package DealsManager::Schema::Result::Dashboard;
+
+use strict;
+use warnings;
+
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
+extends 'DBIx::Class::Core';
+
+__PACKAGE__->load_components("InflateColumn::DateTime");
+__PACKAGE__->table_class('DBIx::Class::ResultSource::View');
+__PACKAGE__->table('deals');
+__PACKAGE__->add_columns('id', {}, 'content', {},
+                         'created', { data_type => 'timestamp with time zone' },
+                         'updated', { data_type => 'timestamp with time zone' },
+                         'type', {}, 'user', {}, 'deal_name', {}, 'deal_id', {});
+__PACKAGE__->result_source_instance->is_virtual(1);
+
+my $sql = "
+SELECT * FROM (
+    SELECT d.id as id, d.name as content, d.created as created,
+           d.updated as updated, 1 as type, u.username as user,
+           d.name as deal_name, d.id as deal_id
+    FROM deals d
+    JOIN users u ON d.responsible_id = u.id
+
+UNION
+
+SELECT n.id as id, n.note as content, n.created as updated,
+       '1970-01-01' as created, 2 as type, u.username as user,
+       q.name as deal_name, q.id as deal_id from notes n
+    JOIN users u on n.user_id = u.id
+    JOIN deals q ON n.deal_id = q.id
+)
+
+AS data ORDER BY data.updated DESC
+";
+
+__PACKAGE__->result_source_instance->view_definition($sql);
+
+1;
+
+__END__
+
+=for
+
+id, content (texto), created,
+type (deal created, deal updated, deal deleted, note created, note deleted),
+username, deal_name, deal_id
+
+=cut
