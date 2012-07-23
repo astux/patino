@@ -34,6 +34,9 @@ sub index :Path :Args(0) {
 
     use DateTime::Duration::Fuzzy qw/time_ago/;
     $c->stash->{time_ago} = sub { time_ago($_[0]); };
+
+    use Number::Format qw/format_number/;
+    $c->stash->{format_number} = sub { format_number($_[0]); };
 }
 
 =head2 default

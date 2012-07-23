@@ -31,6 +31,9 @@ sub index :Chained('base') PathPart('') Args(0) {
               );
 
     $c->stash->{deals} = [ $deals_rs->all ];
+
+    use Number::Format qw/format_number/;
+    $c->stash->{format_number} = sub { format_number($_[0]); };
 }
 
 sub show :Chained('object') PathPart('') Args(0) FormConfig('deals/notes/form.yml') {
@@ -48,6 +51,9 @@ sub show :Chained('object') PathPart('') Args(0) FormConfig('deals/notes/form.ym
     $c->stash->{object} = $deal;
     use DateTime::Duration::Fuzzy qw/time_ago/;
     $c->stash->{time_ago} = sub { time_ago($_[0]); };
+
+    use Number::Format qw/format_number/;
+    $c->stash->{format_number} = sub { format_number($_[0]); };
 }
 
 sub create :Chained('base') PathPart('create') Args(0) FormConfig('deals/form.yml') {
@@ -64,8 +70,7 @@ sub create :Chained('base') PathPart('create') Args(0) FormConfig('deals/form.ym
                                                          });
         $form->model->update( $new_deal );
 
-        my $dashboard_item = { content => 'Deal created',
-                               type => 'deal_created',
+        my $dashboard_item = { type => 'deal_created',
                                created => $datetime_now,
                                user_id => $c->user->id,
                                deal_id => $new_deal->id };
@@ -84,12 +89,43 @@ sub edit :Chained('object') PathPart('edit') Args(0) FormConfig('deals/form.yml'
 
     if ( $form->submitted_and_valid ) {
         use DateTime;
+
         my $deal = $c->stash->{object}->first;
+
+        my $fields_and_labels =
+          { status => 'Status',
+            name => 'Name',
+            probability => 'Probability',
+            responsible_id => 'Responsible',
+            contact_id => 'Contact',
+            price => 'Price' };
+
+        my @modified_fields;
+
+        for my $field (keys %$fields_and_labels) {
+            unless ($form->param_value($field) eq $deal->$field) {
+
+                my $chunk = {
+                             name => $field,
+                             original => $deal->$field,
+                             modified => $form->param_value($field),
+                             label => $fields_and_labels->{$field}
+                            };
+
+                push @modified_fields, $chunk;
+            }
+        }
+
+        use JSON;
+
+        my $changes_json = encode_json \@modified_fields;
+
         my $datetime_now = DateTime->now;
         $deal->updated( $datetime_now );
+
         $form->model->update( $deal );
 
-       my $dashboard_item = { content => 'Deal updated',
+        my $dashboard_item = { content => $changes_json,
                                type => 'deal_updated',
                                created => $datetime_now,
                                user_id => $c->user->id,

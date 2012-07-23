@@ -31,7 +31,7 @@
       <td><a href="[% c.uri_for('/deals', deal.id) %]">[% deal.name %]</a></td>
       <td>[% deal.contact.name %]</td>
       <td>[% deal.probability || 'N/A' %]</td>
-      <td>[% deal.price || 'N/A' %]</td>
+      <td>[% '$ ' _ format_number(deal.price) || 'N/A' %]</td>
       <td>
         [% IF deal.status == 'Pending' %]
         <span class="badge badge-warning">[% deal.status %]</span>
