@@ -6,3 +6,7 @@ body {
 .error_message {
     color: red;
 }
+
+h3 [class^="icon-"], h3 [class*=" icon-"] {
+    margin-top: 4px;
+}

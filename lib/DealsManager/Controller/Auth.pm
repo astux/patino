@@ -16,7 +16,7 @@ sub login_do :Local {
                          password => $c->req->params->{password} });
 
     if ( $authentication_response ) {
-        $c->res->redirect('/deals');
+        $c->res->redirect('/');
     }
     else {
         $c->res->redirect('/auth/login');

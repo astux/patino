@@ -13,7 +13,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Username</th>
       <th>Actions</th>
     </tr>
@@ -22,7 +21,6 @@
   <tbody>
     [% FOREACH user IN users %]
     <tr>
-      <td>[% user.id %]</td>
       <td><a href="[% c.uri_for('/users', user.id) %]">[% user.username %]</a></td>
       <td>
         <a href="[% c.uri_for('/users', user.id) %]">Show</a>,

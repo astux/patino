@@ -13,7 +13,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Name</th>
       <th>Contact</th>
       <th>Probability</th>
@@ -27,7 +26,6 @@
   <tbody>
     [% FOREACH deal IN deals %]
     <tr>
-      <td>[% deal.id %]</td>
       <td><a href="[% c.uri_for('/deals', deal.id) %]">[% deal.name %]</a></td>
       <td>[% deal.contact.name %]</td>
       <td>[% deal.probability || 'N/A' %]</td>

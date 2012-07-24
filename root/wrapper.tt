@@ -21,9 +21,11 @@
             <li><a href="/contacts">Contacts</a></li>
             <li><a href="/deals">Deals</a></li>
             <li><a href="/users">Users</a></li>
-            <li><a href="/auth/logout">Logout</a></li>
           </ul>
 
+          <ul class="nav pull-right">
+            <li><a href="/auth/logout">Logout</a></li>
+          </ul>
           [% END %]
 
         </div>
