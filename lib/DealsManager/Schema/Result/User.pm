@@ -42,6 +42,18 @@ __PACKAGE__->table("users");
   is_nullable: 1
   original: {data_type => "varchar"}
 
+=head2 name
+
+  data_type: 'text'
+  is_nullable: 1
+  original: {data_type => "varchar"}
+
+=head2 email
+
+  data_type: 'text'
+  is_nullable: 1
+  original: {data_type => "varchar"}
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -59,6 +71,18 @@ __PACKAGE__->add_columns(
     original    => { data_type => "varchar" },
   },
   "password",
+  {
+    data_type   => "text",
+    is_nullable => 1,
+    original    => { data_type => "varchar" },
+  },
+  "name",
+  {
+    data_type   => "text",
+    is_nullable => 1,
+    original    => { data_type => "varchar" },
+  },
+  "email",
   {
     data_type   => "text",
     is_nullable => 1,
@@ -130,8 +154,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-16 19:29:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tZhDYNgCy7E7oAw9l3aIow
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-27 17:53:42
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dpK1Pd7oEWZrMtQxGhJA4A
 
 __PACKAGE__->many_to_many('roles', 'users_roles', 'role');
 

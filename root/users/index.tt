@@ -14,6 +14,8 @@
   <thead>
     <tr>
       <th>Username</th>
+      <th>Name</th>
+      <th>E-mail</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,6 +24,8 @@
     [% FOREACH user IN users %]
     <tr>
       <td><a href="[% c.uri_for('/users', user.id) %]">[% user.username %]</a></td>
+      <td><a href="[% c.uri_for('/users', user.id) %]">[% user.name %]</a></td>
+      <td><a href="[% c.uri_for('/users', user.id) %]">[% user.email %]</a></td>
       <td>
         <a href="[% c.uri_for('/users', user.id) %]">Show</a>,
         <a href="[% c.uri_for('/users', user.id, 'edit') %]">Edit</a>,

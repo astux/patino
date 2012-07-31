@@ -2,7 +2,9 @@
 create table users (
 id serial primary key,
 username varchar,
-password varchar);
+password varchar,
+name varchar,
+email varchar);
 
   CREATE TABLE roles (
             id   serial primary key,
