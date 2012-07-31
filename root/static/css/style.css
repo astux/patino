@@ -10,3 +10,7 @@ body {
 h3 [class^="icon-"], h3 [class*=" icon-"] {
     margin-top: 4px;
 }
+
+textarea {
+    width: 100%;
+}
