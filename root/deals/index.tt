@@ -8,7 +8,7 @@
   </li>
 </ul>
 
-<h2>Deals List</h2>
+<h2 class='page-header'>Deals List</h2>
 
 <table class="table table-striped">
   <thead>
@@ -39,7 +39,7 @@
         <span class="badge badge-important">[% deal.status %]</span>
         [% END %]
       </td>
-      <td>[% deal.responsible.username %]</td>
+      <td>[% deal.responsible.name %]</td>
       <td>
         <a href="[% c.uri_for('/deals', deal.id) %]">Show</a>,
         <a href="[% c.uri_for('/deals', deal.id, 'edit') %]">Edit</a>,

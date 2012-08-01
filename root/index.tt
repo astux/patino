@@ -10,7 +10,7 @@
   <h3><i class="icon-plus"></i> Deal Created: <a href="[% c.uri_for('/deals', item.deal_id) %]">[% item.deal.name %]</a></h3>
 
   <blockquote>
-    <small>[% item.user.username %], [% time_ago(item.created) %]</small>
+    <small>[% item.user.name %], [% time_ago(item.created) %]</small>
   </blockquote>
 
   [% ELSIF item.type == 'deal_updated' %]
@@ -61,7 +61,7 @@
     </table>
 
     [% END %]
-    <small>[% item.user.username %], [% time_ago(item.created) %]</small>
+    <small>[% item.user.name %], [% time_ago(item.created) %]</small>
   </blockquote>
 
   [% ELSIF item.type == 'note_created' %]
@@ -70,7 +70,7 @@
 
   <blockquote>
     <p>[% item.content.replace('\r\n', '<br>') %]</p>
-    <small>[% item.user.username %], [% time_ago(item.created) %]</small>
+    <small>[% item.user.name %], [% time_ago(item.created) %]</small>
   </blockquote>
 
   [% END %]

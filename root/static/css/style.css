@@ -12,5 +12,8 @@ h3 [class^="icon-"], h3 [class*=" icon-"] {
 }
 
 textarea {
-    width: 100%;
+    width: 50%;
 }
+
+label { color: #000; text-shadow: 0 0; }
+.label { background-color: #FFF; text-shadow: 0 0; }

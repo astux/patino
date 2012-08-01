@@ -1,0 +1,5 @@
+---
+elements:
+  - type: Text
+    name: qwe
+    label: qwe

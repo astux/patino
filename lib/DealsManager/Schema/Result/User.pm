@@ -138,6 +138,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 todos
+
+Type: has_many
+
+Related object: L<DealsManager::Schema::Result::Todo>
+
+=cut
+
+__PACKAGE__->has_many(
+  "todos",
+  "DealsManager::Schema::Result::Todo",
+  { "foreign.assignee_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 users_roles
 
 Type: has_many
@@ -154,8 +169,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-27 17:53:42
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dpK1Pd7oEWZrMtQxGhJA4A
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-31 17:42:01
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dHzU77IWNc/39beC69lXRQ
 
 __PACKAGE__->many_to_many('roles', 'users_roles', 'role');
 

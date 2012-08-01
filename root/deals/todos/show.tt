@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>TODOs for Deal [% deal.name %]</h1>
+</div>
+
+<h2 class="page-header">TODO Details</h2>
+
+<dl class="dl-horizontal">
+  <dt>Title</dt><dd>[% todo.title %]</dd>
+  <dt>Assignee</dt><dd>[% todo.assignee.name %]</dd>
+  <dt>Scheduled to</dt><dd>[% todo.scheduled %]</dd>
+  <dt>Status</dt><dd>[% todo.status %]</dd>
+  <dt>Description</dt><dd>[% todo.body.replace('\r\n', '<br>') %]</dd>
+</dl>

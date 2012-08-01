@@ -1,30 +1,36 @@
 <div class="page-header">
-  <h1>Deals</h1>
+  <h1>Deal [% deal.name %]</h1>
 </div>
 
-<h2>Deal : [% object.name %]</h2>
+<ul class="nav nav-pills">
+  <li class="active">
+    <a href="[% c.uri_for('/deals', deal.id, 'todos') %]"><i class="icon-flag icon-white"></i> TODOs</a>
+  </li>
+</ul>
+
+<h2 class="page-header">Deal Details</h2>
 
 <dl class="dl-horizontal">
-  <dt>Id</dt><dd>[% object.id %]</dd>
-  <dt>Name</dt><dd>[% object.name %]</dd>
-  <dt>Responsible</dt><dd>[% object.responsible.username %]</dd>
-  <dt>Contact</dt><dd>[% object.contact.name %]</dd>
-  <dt>Probability to win</dt><dd>[% object.probability %]</dd>
-  <dt>Price</dt><dd>[% object.price %]</dd>
-  <dt>Status</dt><dd>[% object.status %]</dd>
-  <dt>Date created</dt><dd>[% object.created %]</dd>
-  <dt>Date updated</dt><dd>[% object.updated %]</dd>
+  <dt>Name</dt><dd>[% deal.name %]</dd>
+  <dt>Responsible</dt><dd>[% deal.responsible.name %]</dd>
+  <dt>Contact</dt><dd>[% deal.contact.name %]</dd>
+  <dt>Probability to win</dt><dd>[% deal.probability %]</dd>
+  <dt>Price</dt><dd>[% deal.price %]</dd>
+  <dt>Status</dt><dd>[% deal.status %]</dd>
+  <dt>Date created</dt><dd>[% deal.created %]</dd>
+  <dt>Date updated</dt><dd>[% deal.updated %]</dd>
 </dl>
 
-[% FOREACH note IN object.notes %]
+<h2 class='page-header'>Deal Notes</h2>
 
-<h3>Noted by [% note.user.username %], [% time_ago(note.created) %]</h3>
+[% FOREACH note IN deal.notes %]
+
+<h3>Noted by [% note.user.name %], [% time_ago(note.created) %]</h3>
 <blockquote>
   <p>[% note.note.replace('\r\n', '<br>') %]</p>
-  <small>[% note.user.username %], [% note.created %]</small>
-  <a href="[% c.uri_for('/deals', object.id, 'notes', note.id, 'delete') %]">Delete note</a>
+  <small>[% note.user.name %], [% time_ago(note.created) %]</small>
+  <a href="[% c.uri_for('/deals', deal.id, 'notes', note.id, 'delete') %]">Delete note</a>
 </blockquote>
-
 
 [% END %]
 

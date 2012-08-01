@@ -1,4 +1,24 @@
 ---
+attributes:
+  class: form-horizontal
+
+default_args:
+  elements:
+    Text:
+      render_method: tt
+      filename: input-bs
+      label_attrs:
+        class: control-label
+      container_attributes:
+        class: control-group
+
+    Select:
+      render_method: tt
+      filename: input-bs
+      label_attrs:
+        class: control-label
+      container_attributes:
+        class: control-group
 
 elements:
     - type: Hidden
@@ -11,32 +31,31 @@ elements:
         - Required
       attrs:
         class: span4
-      container_tag:
 
     - type: Select
       name: contact_id
       label: Contact
       model_config:
         resultset: Contact
-      container_tag:
+
     - type: Text
       name: price
       label: Price
       constraints:
         - type: Number
-      container_tag:
+
     - type: Select
       name: responsible_id
       label: Responsible
       model_config:
         resultset: User
-      container_tag:
+
     - type: Text
       name: probability
       label: Probability
       constraints:
         - type: Number
-      container_tag:
+
     - type: Select
       name: status
       label: Status
@@ -44,10 +63,13 @@ elements:
         - ['Pending', 'Pending']
         - ['Won', 'Won']
         - ['Lost', 'Lost']
-      container_tag:
-    - type: Submit
-      name: submit
-      value: Submit
 
-      attrs:
-        class: btn btn-primary
+    - type: Block
+      attributes:
+        class: form-actions
+      elements:
+        - type: Submit
+          name: submit
+          value: Submit
+          attrs:
+            class: btn btn-primary

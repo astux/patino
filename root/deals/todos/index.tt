@@ -1,0 +1,41 @@
+<div class="page-header">
+  <h1>TODOs for Deal [% deal.name %]</h1>
+</div>
+
+<ul class="nav nav-pills">
+  <li class="active">
+    <a href="[% c.uri_for('/deals', deal.id, 'todos/create') %]">
+      <i class="icon-plus icon-white"></i> Create TODO
+    </a>
+  </li>
+</ul>
+
+<h2 class="page-header">TODOs List</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Assignee</th>
+      <th>Scheduled to</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    [% FOREACH todo IN todos %]
+    <tr>
+      <td><a href="[% c.uri_for('/deals', deal.id, 'todos', todo.id) %]">[% todo.title %]</a></td>
+      <td>[% todo.assignee.name %]</td>
+      <td>[% todo.scheduled %]</td>
+      <td>[% todo.status %]</td>
+      <td>
+        <a href="[% c.uri_for('/deals', deal.id, 'todos', todo.id) %]">Show</a>,
+        <a href="[% c.uri_for('/deals', deal.id, 'todos', todo.id, 'edit') %]">Edit</a>,
+        <a href="[% c.uri_for('/deals', deal.id, 'todos', todo.id, 'delete') %]">Delete</a>
+      </td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>

@@ -1,0 +1,64 @@
+---
+
+attrs:
+  class: form-horizontal
+
+default_args:
+  elements:
+    Textarea:
+      render_method: tt
+      filename: input-bs
+      label_attrs:
+        class: control-label
+      container_attributes:
+        class: control-group
+    Text:
+      render_method: tt
+      filename: input-bs
+      label_attrs:
+        class: control-label
+      container_attributes:
+        class: control-group
+    Select:
+      render_method: tt
+      filename: input-bs
+      label_attrs:
+        class: control-label
+      container_attributes:
+        class: control-group
+elements:
+  - type: Text
+    name: title
+    label: Title
+
+  - type: Textarea
+    name: body
+    label: TODO
+
+  - type: Select
+    name: assignee_id
+    label: Assignee
+    model_config:
+      resultset: User
+
+  - type: Text
+    name: scheduled
+    label: Scheduled to
+
+  - type: Select
+    name: status
+    label: Status
+    options:
+      - ['todo', 'TODO']
+      - ['in_progress', 'IN PROGRESS']
+      - ['done', 'DONE']
+
+  - type: Block
+    attrs:
+      class: form-actions
+    elements:
+      - type: Submit
+        name: submit
+        value: Submit
+        attrs:
+          class: btn btn-primary

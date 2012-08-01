@@ -1,25 +1,25 @@
-package DealsManager::Controller::Deals::Notes;
+package DealsManager::Controller::Deals::TODOs::Comments;
 use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller::HTML::FormFu'; }
 
-sub base :Chained('/deals/object') :PathPart('notes') :CaptureArgs(0) {
+sub base :Chained('/deals/todos/object') :PathPart('comments') :CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash->{notes_rs} = $c->model('DB::Note');
+    $c->stash->{object_note} = $c->model('DB::Note');
 }
 
-sub object :Chained('/deals/object') :PathPart('notes') :CaptureArgs(1) {
+sub object :Chained('base') :PathPart('') :CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
 
-    $c->stash->{notes_rs} = $c->model('DB::Note')->search_rs({ 'me.id' => $id });
+    $c->stash->{object_note} = $c->model('DB::Note')->search_rs({ 'me.id' => $id });
 }
 
 sub index :Chained('base') :PathPart('') :Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash->{notes} = [$c->stash->{deals_rs}->first->notes];
+    $c->stash->{notes} = [$c->stash->{object}->first->notes];
 }
 
 sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig('deals/notes/form.yml') {
@@ -30,9 +30,9 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig('deals/note
     use DateTime;
 
     my $datetime_now = DateTime->now;
-    my $new_note = $c->stash->{notes_rs}->new_result({
-                                                      created => $datetime_now
-                                                     });
+    my $new_note = $c->stash->{object_note}->new_result({
+                                                         created => $datetime_now
+                                                        });
 
     $form->model->update( $new_note );
 
@@ -44,14 +44,14 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig('deals/note
 
     my $dashboard_rs = $c->model('DB::Dashboard')->create( $dashboard_item );
 
-    $c->res->redirect( $c->uri_for('/deals', $c->stash->{deals_rs}->first->id) );
+    $c->res->redirect( $c->uri_for('/deals', $c->stash->{object}->first->id) );
 }
 
 sub delete :Chained('object') PathPart('delete') Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash->{notes_rs}->first->delete;
-    $c->res->redirect( $c->uri_for('/deals', $c->stash->{deals_rs}->first->id) );
+    $c->stash->{object_note}->delete;
+    $c->res->redirect( $c->uri_for('/deals', $c->stash->{object}->first->id) );
 }
 
 __PACKAGE__->meta->make_immutable;
